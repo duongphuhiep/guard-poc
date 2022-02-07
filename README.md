@@ -1,8 +1,8 @@
 This is a POC for a (possibly) new `Guard` library.
 
+* As in Jan 2022, my POC supports more customization-rich than any existing Guard library eg: [Ardalis.GuardClauses](https://www.nuget.org/packages/Ardalis.GuardClauses/), [Guard.Net](https://www.nuget.org/packages/Guard.Net/)...
 * It make use of the `CallerArgumentExpression` in .NET 6 (C# 10). So you won't be able to use this POC for old .NET project
-* As in Jan 2022, my POC supports more customization-rich than any existing Guard library.
-* TODO: Benchmark on performance comparision
+* `CallerArgumentExpression`s are evaluated in Compiled time so the Guard performance in runtime shouldn't be inferior to existings solutions. (TODO: Benchmark on performance comparision)
  
 Here the usage's gist
 
@@ -21,10 +21,10 @@ Guard.AgainstNegative(payment.amount);
 Guard.AgainstNegative(payment.amount, niceMsg => new InvalidAmountException(niceMsg));
 
 //Custom input expression: we don't want to see the expression 'payment.amount' in the nice message
-//the following code will throws: System.ArgumentException: Invalid 'payment amount' = '-10' is a negative value
-Guard.AgainstNegative(payment.amount, "payment amount");
-//or the following code will throws: InvalidAmountException: Invalid 'payment amount' = '-10' is a negative value
-Guard.AgainstNegative(payment.amount, niceMsg => new InvalidAmountException(niceMsg), "payment amount");
+//the following code will throws: System.ArgumentException: Invalid 'Payment Amount' = '-10' is a negative value
+Guard.AgainstNegative(payment.amount, "Payment Amount");
+//or the following code will throws: InvalidAmountException: Invalid 'Payment Amount' = '-10' is a negative value
+Guard.AgainstNegative(payment.amount, niceMsg => new InvalidAmountException(niceMsg), "Payment Amount");
 
 //Custom exeption and custom message
 //the following code will throws: InvalidAmountException: the payment amount is invalid
