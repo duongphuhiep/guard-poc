@@ -29,3 +29,11 @@ Guard.AgainstNegative(payment.amount, niceMsg => new InvalidAmountException(nice
 //Custom exeption and custom message
 //the following code will throws: InvalidAmountException: the payment amount is invalid
 Guard.AgainstNegative(payment.amount, _ => new InvalidAmountException("the payment amount is invalid"));
+```
+
+Final note:
+
+I have no intention to make a real Guard library, because these nice small tools have never been useful for me... This POC allow me to try the `CallerArgumentExpression`, and show that it can be used for a better Guard library (or debug / logging).
+
+
+
